@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ReservationService {
     ReservationResponseDTO saveReservation(ReservationRequestDTO reservationRequest);
+    ReservationResponseDTO updateReservation(int id, ReservationRequestDTO reservationRequest);
     List<ReservationResponseDTO> getReservations();
 }

@@ -2,6 +2,8 @@ package com.coherent.solutions.test.hotelreservationsservice.service.impl;
 
 import com.coherent.solutions.test.hotelreservationsservice.dto.request.ReservationRequestDTO;
 import com.coherent.solutions.test.hotelreservationsservice.dto.response.ReservationResponseDTO;
+import com.coherent.solutions.test.hotelreservationsservice.exceptions.BadRequestException;
+import com.coherent.solutions.test.hotelreservationsservice.exceptions.ResourceNotFoundException;
 import com.coherent.solutions.test.hotelreservationsservice.model.Reservation;
 import com.coherent.solutions.test.hotelreservationsservice.repository.ReservationRepository;
 import com.coherent.solutions.test.hotelreservationsservice.service.ReservationService;
@@ -22,6 +24,21 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation reservation = mapReservationRequestDTOToModel(reservationRequest);
         //TODO validate there are no reservations for the same roomNumber during the reservation dates
         //if so, return error
+        reservation = reservationRepository.save(reservation);
+        return mapModelToReservationResponseDTO(reservation);
+    }
+
+    @Override
+    public ReservationResponseDTO updateReservation(int id, ReservationRequestDTO reservationRequest) {
+        Reservation reservation = mapReservationRequestDTOToModel(reservationRequest);
+        reservation.setId(id);
+
+        if (!reservationRepository.existsById(id)) {
+            throw new ResourceNotFoundException(String.format("reservation not found with id: ", id));
+        }
+        //TODO validate there are no reservations for the same roomNumber during the reservation dates
+        //if so, return error
+
         reservation = reservationRepository.save(reservation);
         return mapModelToReservationResponseDTO(reservation);
     }

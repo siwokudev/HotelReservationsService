@@ -5,21 +5,20 @@ import com.coherent.solutions.test.hotelreservationsservice.dto.response.Reserva
 import com.coherent.solutions.test.hotelreservationsservice.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/reservations")
+@RequestMapping("/reservation")
 @RequiredArgsConstructor
-public class ReservationsController {
+public class ReservationController {
 
     private final ReservationService reservationService;
 
     @GetMapping
-    public ResponseEntity<List<ReservationResponseDTO>> getReservations() {
+    public ResponseEntity<List<ReservationResponseDTO>> getAllReservations() {
         List<ReservationResponseDTO> reservations = reservationService.getReservations();
         return ResponseEntity.ok(reservations);
     }
@@ -28,5 +27,12 @@ public class ReservationsController {
     public ResponseEntity<ReservationResponseDTO> saveReservation(@RequestBody ReservationRequestDTO reservationRequestDTO) {
         ReservationResponseDTO reservation = reservationService.saveReservation(reservationRequestDTO);
         return new ResponseEntity(reservation, HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ReservationResponseDTO> updateReservation(@PathVariable int id
+            , @RequestBody ReservationRequestDTO reservationRequestDTO) {
+        ReservationResponseDTO reservation = reservationService.updateReservation(id, reservationRequestDTO);
+        return new ResponseEntity(reservation, HttpStatus.ACCEPTED);
     }
 }
