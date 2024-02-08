@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,14 @@ public class ReservationServiceImpl implements ReservationService {
         //if so, return error
         reservation = reservationRepository.save(reservation);
         return mapModelToReservationResponseDTO(reservation);
+    }
+
+    @Override
+    public List<ReservationResponseDTO> getReservations() {
+        List<ReservationResponseDTO> reservations = reservationRepository.findAll().stream()
+                .map(reservation -> mapModelToReservationResponseDTO(reservation))
+                .collect(Collectors.toList());
+        return reservations;
     }
 
     private Reservation mapReservationRequestDTOToModel(ReservationRequestDTO reservationRequest) {
