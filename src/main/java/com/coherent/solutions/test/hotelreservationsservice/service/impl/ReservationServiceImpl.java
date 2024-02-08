@@ -34,7 +34,7 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setId(id);
 
         if (!reservationRepository.existsById(id)) {
-            throw new ResourceNotFoundException(String.format("reservation not found with id: ", id));
+            throw new ResourceNotFoundException(String.format("reservation not found with id: %d", id));
         }
         //TODO validate there are no reservations for the same roomNumber during the reservation dates
         //if so, return error
