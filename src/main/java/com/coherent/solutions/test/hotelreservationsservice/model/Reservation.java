@@ -33,4 +33,9 @@ public class Reservation {
             name = "reservation_dates",
             joinColumns = @JoinColumn(name="reservation_id"))
     private List<LocalDate> reservationDates;
+    /*
+    improvement: change this to be startDate and EndDate will make it easier to find by date ranges
+      LocalDate startDate;
+      LocalDate endDate;
+    */
 }
