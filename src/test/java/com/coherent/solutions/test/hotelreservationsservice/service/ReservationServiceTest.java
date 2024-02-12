@@ -5,7 +5,7 @@ import com.coherent.solutions.test.hotelreservationsservice.dto.response.Reserva
 import com.coherent.solutions.test.hotelreservationsservice.exceptions.BadRequestException;
 import com.coherent.solutions.test.hotelreservationsservice.exceptions.ResourceNotFoundException;
 import com.coherent.solutions.test.hotelreservationsservice.model.Reservation;
-import com.coherent.solutions.test.hotelreservationsservice.objectmother.dto.ReservationRequestDTOMother;
+import com.coherent.solutions.test.hotelreservationsservice.objectmother.dto.request.ReservationRequestDTOMother;
 import com.coherent.solutions.test.hotelreservationsservice.objectmother.model.ReservationMother;
 import com.coherent.solutions.test.hotelreservationsservice.objectmother.utils.DatesMother;
 import com.coherent.solutions.test.hotelreservationsservice.repository.ReservationRepository;
@@ -127,7 +127,7 @@ public class ReservationServiceTest {
         int id = 123;
 
         LocalDate requestStartDate = DatesMother.inTheFuture();
-        LocalDate requestEndDate = DatesMother.inTheFutureFromDateAndFixedDaysApart(4, requestStartDate);
+        LocalDate requestEndDate = requestStartDate.plusDays(4);
 
         LocalDate savedReservationStartDate = requestStartDate.plusDays(1);
         LocalDate savedReservationEndDate = requestEndDate.minusDays(1);
@@ -170,7 +170,7 @@ public class ReservationServiceTest {
         int id = 123;
 
         LocalDate requestStartDate = DatesMother.inTheFuture();
-        LocalDate requestEndDate = DatesMother.inTheFutureFromDateAndFixedDaysApart(2, requestStartDate);
+        LocalDate requestEndDate = requestStartDate.plusDays(2);
 
         LocalDate savedReservationStartDate = requestStartDate.minusDays(1);
         LocalDate savedReservationEndDate = requestEndDate.plusDays(1);
@@ -213,7 +213,7 @@ public class ReservationServiceTest {
         int id = 123;
 
         LocalDate requestStartDate = DatesMother.inTheFuture();
-        LocalDate requestEndDate = DatesMother.inTheFutureFromDateAndFixedDaysApart(3, requestStartDate);
+        LocalDate requestEndDate = requestStartDate.plusDays(3);
 
         LocalDate savedReservationStartDate = requestEndDate.minusDays(1);
         LocalDate savedReservationEndDate = requestEndDate.plusDays(1);
@@ -256,7 +256,7 @@ public class ReservationServiceTest {
         int id = 123;
 
         LocalDate requestStartDate = DatesMother.inTheFuture();
-        LocalDate requestEndDate = DatesMother.inTheFutureFromDateAndFixedDaysApart(3, requestStartDate);
+        LocalDate requestEndDate = requestStartDate.plusDays(3);
 
         LocalDate savedReservationStartDate = requestStartDate.minusDays(1);
         LocalDate savedReservationEndDate = requestStartDate.plusDays(1);
@@ -299,7 +299,7 @@ public class ReservationServiceTest {
         int id = 123;
 
         LocalDate requestStartDate = DatesMother.inTheFuture();
-        LocalDate requestEndDate = DatesMother.inTheFutureFromDateAndFixedDaysApart(4, requestStartDate);
+        LocalDate requestEndDate = requestStartDate.plusDays(4);
 
         LocalDate savedReservationStartDate = requestStartDate.plusDays(1);
         LocalDate savedReservationEndDate = requestEndDate.minusDays(1);
@@ -342,7 +342,7 @@ public class ReservationServiceTest {
         int id = 123;
 
         LocalDate requestStartDate = DatesMother.inTheFuture();
-        LocalDate requestEndDate = DatesMother.inTheFutureFromDateAndFixedDaysApart(2, requestStartDate);
+        LocalDate requestEndDate = requestStartDate.plusDays(2);
 
         LocalDate savedReservationStartDate = requestStartDate.minusDays(1);
         LocalDate savedReservationEndDate = requestEndDate.plusDays(1);
@@ -385,7 +385,7 @@ public class ReservationServiceTest {
         int id = 123;
 
         LocalDate requestStartDate = DatesMother.inTheFuture();
-        LocalDate requestEndDate = DatesMother.inTheFutureFromDateAndFixedDaysApart(3, requestStartDate);
+        LocalDate requestEndDate = requestStartDate.plusDays(3);
 
         LocalDate savedReservationStartDate = requestStartDate.minusDays(1);
         LocalDate savedReservationEndDate = requestStartDate.plusDays(1);
@@ -428,7 +428,7 @@ public class ReservationServiceTest {
         int id = 123;
 
         LocalDate requestStartDate = DatesMother.inTheFuture();
-        LocalDate requestEndDate = DatesMother.inTheFutureFromDateAndFixedDaysApart(3, requestStartDate);
+        LocalDate requestEndDate = requestStartDate.plusDays(3);
 
         LocalDate savedReservationStartDate = requestEndDate.minusDays(1);
         LocalDate savedReservationEndDate = requestEndDate.plusDays(1);

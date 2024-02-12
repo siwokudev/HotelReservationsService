@@ -1,4 +1,4 @@
-package com.coherent.solutions.test.hotelreservationsservice.objectmother.dto;
+package com.coherent.solutions.test.hotelreservationsservice.objectmother.dto.request;
 
 import com.coherent.solutions.test.hotelreservationsservice.dto.request.ReservationRequestDTO;
 import com.coherent.solutions.test.hotelreservationsservice.objectmother.utils.DatesMother;
