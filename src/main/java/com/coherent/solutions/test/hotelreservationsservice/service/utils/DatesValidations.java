@@ -1,8 +1,8 @@
-package com.coherent.solutions.test.hotelreservationsservice.service.validations;
+package com.coherent.solutions.test.hotelreservationsservice.service.utils;
 
 import java.time.LocalDate;
 
-public class DatesValidation {
+public class DatesValidations {
 
     public static boolean areDatesValid(LocalDate startDate, LocalDate endDate) {
         return isStartDateNotInThePast(startDate) && isEndDateAfterStartDate(startDate, endDate);

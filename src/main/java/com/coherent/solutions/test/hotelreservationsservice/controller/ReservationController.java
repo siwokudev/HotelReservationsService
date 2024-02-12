@@ -4,7 +4,7 @@ import com.coherent.solutions.test.hotelreservationsservice.dto.request.Reservat
 import com.coherent.solutions.test.hotelreservationsservice.dto.response.ReservationResponseDTO;
 import com.coherent.solutions.test.hotelreservationsservice.exceptions.BadRequestException;
 import com.coherent.solutions.test.hotelreservationsservice.service.ReservationService;
-import com.coherent.solutions.test.hotelreservationsservice.service.validations.DatesValidation;
+import com.coherent.solutions.test.hotelreservationsservice.service.utils.DatesValidations;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -53,7 +53,7 @@ public class ReservationController {
     }
 
     private void validateDates(ReservationRequestDTO reservationRequestDTO) {
-        if (!DatesValidation.areDatesValid(reservationRequestDTO.getStartDate(), reservationRequestDTO.getEndDate())) {
+        if (!DatesValidations.areDatesValid(reservationRequestDTO.getStartDate(), reservationRequestDTO.getEndDate())) {
             throw new BadRequestException(INVALID_DATE_RANGE);
         }
     }

@@ -8,7 +8,7 @@ import com.coherent.solutions.test.hotelreservationsservice.mappers.ReservationM
 import com.coherent.solutions.test.hotelreservationsservice.model.Reservation;
 import com.coherent.solutions.test.hotelreservationsservice.repository.ReservationRepository;
 import com.coherent.solutions.test.hotelreservationsservice.service.ReservationService;
-import com.coherent.solutions.test.hotelreservationsservice.service.validations.DatesValidation;
+import com.coherent.solutions.test.hotelreservationsservice.service.utils.DatesValidations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -79,7 +79,7 @@ public class ReservationServiceImpl implements ReservationService {
     private void validateReservationIsNotInThePast(Reservation reservation) {
         List<LocalDate> reservationDates = reservation.getReservationDates();
         LocalDate endDate = reservationDates.get(reservationDates.size() - 1);
-        if (DatesValidation.isEndDateInThePast(endDate)) {
+        if (DatesValidations.isEndDateInThePast(endDate)) {
             throw new BadRequestException(RESERVATION_EXPIRED);
         }
     }
