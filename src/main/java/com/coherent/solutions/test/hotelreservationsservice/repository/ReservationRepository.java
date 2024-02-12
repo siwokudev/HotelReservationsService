@@ -33,5 +33,5 @@ public interface ReservationRepository extends CrudRepository<Reservation, Integ
         and dates.start_date < ?2
         and r.room_number = ?3
         """, nativeQuery = true)
-    List<Reservation> findByReservationByOverlappingDates(LocalDate startDate, LocalDate endDate, int roomNumber);
+    List<Reservation> findByReservationAndByOverlappingDates(LocalDate startDate, LocalDate endDate, int roomNumber);
 }

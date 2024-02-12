@@ -11,7 +11,7 @@ public class ReservationRequestDTOMother {
     public static ReservationRequestDTO.ReservationRequestDTOBuilder complete() {
         LocalDate startDate = DatesMother.inTheFuture();
         return ReservationRequestDTO.builder()
-                .clientFullName(faker.name().toString())
+                .clientFullName(faker.name().fullName())
                 .roomNumber(faker.number().numberBetween(1,999))
                 .startDate(startDate)
                 .endDate(DatesMother.inTheFutureFromDate(startDate));

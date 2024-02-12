@@ -42,7 +42,7 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation reservation = reservationRepository.findById(id).get();
 
         validateReservationIsNotInThePast(reservation);
-        validateRoomIsNotBookedForGivenDates(reservationRequest);
+        validateRoomIsNotBookedForGivenDates(reservationRequest, id);
 
         reservation = ReservationMapper.INSTANCE.reservationRequestDTOToReservation(reservationRequest);
         reservation.setId(id);
@@ -70,6 +70,15 @@ public class ReservationServiceImpl implements ReservationService {
             throw new BadRequestException(ROOM_ALREADY_BOOKED);
         }
     }
+
+    private void validateRoomIsNotBookedForGivenDates(ReservationRequestDTO reservationRequest, int idToIgnore) {
+        List<Reservation> reservations = findReservationsWithOverlappingDates(reservationRequest);
+        boolean containsReservationId = !reservations.stream().filter(reservation -> idToIgnore != reservation.getId()).collect(Collectors.toList()).isEmpty();
+
+        if (!reservations.isEmpty() && containsReservationId) {
+            throw new BadRequestException(ROOM_ALREADY_BOOKED);
+        }
+    }
     private void validateReservationExists(int id) {
         if (!reservationRepository.existsById(id)) {
             throw new ResourceNotFoundException(String.format(RESERVATION_NOT_FOUND, id));
@@ -85,7 +94,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
     private List<Reservation> findReservationsWithOverlappingDates(ReservationRequestDTO reservationRequest) {
         List<Reservation> reservations = reservationRepository
-                .findByReservationByOverlappingDates(reservationRequest.getStartDate(), reservationRequest.getEndDate(),
+                .findByReservationAndByOverlappingDates(reservationRequest.getStartDate(), reservationRequest.getEndDate(),
                         reservationRequest.getRoomNumber());
         return reservations;
     }

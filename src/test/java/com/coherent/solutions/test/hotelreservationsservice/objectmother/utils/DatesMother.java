@@ -3,6 +3,7 @@ package com.coherent.solutions.test.hotelreservationsservice.objectmother.utils;
 import com.github.javafaker.Faker;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class DatesMother {
 
@@ -16,6 +17,10 @@ public class DatesMother {
     public static LocalDate inTheFutureFromDate(LocalDate from) {
         int days = faker.number().numberBetween(1, 200);
         return from.plusDays(days);
+    }
+
+    public static LocalDate inTheFutureFromDateAndFixedDaysApart(int daysApart, LocalDate from) {
+        return from.plusDays(daysApart);
     }
 
     public static LocalDate inThePast() {
